@@ -1,38 +1,130 @@
-.App {
+/* general
+==============================================================================*/
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+.panel-title {
+  background: #ddd;
+  width: 100%;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ /* .scrollable-content {
+  position: absolute;
+  top: ;
+  bottom: 0;
+  left: 0;
+  flex-grow: 1;
+  overflow: auto;
+  min-height: 0;
+} */
+
+/*edit panel
+==============================================================================*/
+.edit-panel {
+  background: #888;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  /* overflow: scroll; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sections-container {
+  /* overflow: scroll; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.edit-section {
+  margin: 10px;
+  border: 1px dashed #fff;
+  padding-bottom: 10px;
+}
+
+.controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* background: red; */
+  margin-top: auto;
+}
+
+.control-button {
+  flex: 1;
+  min-width: 40%;
+  padding: 10px;
+  margin: 6px 10px;
+
+}
+
+.print-button {
+  flex: 2;
+  background: greenyellow;
+  border: 2px solid #000;
+}
+
+/* inputs
+==============================================================================*/
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* preview panel
+==============================================================================*/
+.preview-panel {
+  background: #777;
+  flex:1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/*cv container
+==============================================================================*/
+.cv-container {
+  height: 700px;
+  width: 500px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cv-header {
+  background: dodgerblue;
+  text-align: center;
+}
+
+
+/*section
+==============================================================================*/
+.edit-section header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-section header h1 {
+  flex: 1;
+}
+
+.edit-section-btn-header-controls {
+  align-self: center;
+
+}
+.add-item {
+  width: 40px;
+  height: 40px;
+  /* margin-left: 10px; */
+}
+
+.collapse {
+  align-self: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
 }
