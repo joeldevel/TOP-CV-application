@@ -95,13 +95,23 @@ button {
   margin-top: 100px;
 }
 
+
 .cv-header {
   background: dodgerblue;
   text-align: center;
 }
 
-
-/*section
+.cv-section {
+  border: 1px solid black;
+  padding-left: 20px;
+}
+.cv-section p {
+  line-height: 0.8;
+}
+.cv-field-label {
+  font-weight: 600;
+}
+/*edit section
 ==============================================================================*/
 .edit-section header {
   display: flex;

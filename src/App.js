@@ -111,7 +111,54 @@ function App() {
                     <h1>cv preview here</h1>
                 </div>
                 <div className="cv-body">
-                    <h2> General information</h2>
+                    <section className="cv-section">
+                        <h2 className="cv-section-title">General information</h2>
+                        <p className="cv-complete-name">
+                            <span className="cv-field-label">name </span>John perez</p>
+                        <p className="cv-email">
+                            <span className="cv-field-label">email </span>jonh.perex@tutanota.com</p>
+                    </section>
+                    <section className="cv-section">
+                        <h2 className="cv-section-title">Education</h2>
+                        <ul className="education-list">
+                            <li>
+                                <span className="cv-field-label">name </span>Saint garch university
+                                   <ul>
+                                        <li><span className="cv-field-label">title </span>CTO</li>
+                                        <li><span className="cv-field-label">date </span>2022</li>
+                                   </ul>
+                            </li>
+                            <li>
+                                <span className="cv-field-label">name </span>Pio XII Politeknejus
+                                   <ul>
+                                        <li><span className="cv-field-label">title </span>Boleadoras Engineer</li>
+                                        <li><span className="cv-field-label">date </span>2015</li>
+                                   </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section className="cv-section">
+                        <h2 className="cv-section-title">Work experience</h2>
+                        <ul className="work-experience-list">
+                            <li>
+                                <span className="cv-field-label">company </span> google
+                                   <ul>
+                                        <li><span className="cv-field-label">position </span>CEO</li>
+                                        <li><span className="cv-field-label">from </span>1990</li>
+                                        <li><span className="cv-field-label">to </span>present</li>
+                                   </ul>
+                            </li>
+                            <li>
+                                <span className="cv-field-label">company </span> Amazon
+                                   <ul>
+                                        <li><span className="cv-field-label">position </span>Call center</li>
+                                        <li><span className="cv-field-label">from </span>1985</li>
+                                        <li><span className="cv-field-label">to </span>1990</li>
+                                   </ul>
+                            </li>
+
+                        </ul>
+                    </section>
 
                 </div>
             </div>
