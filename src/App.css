@@ -152,3 +152,50 @@ button {
   height: 40px;
   margin-left: 10px;
 }
+
+
+
+/* media query for printing */
+@media print {
+    .edit-panel {
+        overflow: hidden;
+    }
+    .myDivToPrint {
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
+        border: 0px ;
+    }
+    .cv-container {
+      /* height: 700px;
+      width: 500px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      margin-top: 100px; */
+    }
+
+
+    .cv-header {
+      /* background: dodgerblue; */
+      /* text-align: center; */
+    }
+
+    .cv-section {
+      border: 0px solid black;
+      /* padding-left: 20px; */
+    }
+    .cv-section p {
+      /* line-height: 0.8; */
+    }
+    .cv-field-label {
+      /* font-weight: 600; */
+    }
+}

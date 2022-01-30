@@ -148,7 +148,17 @@ function App() {
   }
 
   const printCV = () => {
-
+      // var doc = new jsPDF('p', 'pt');
+      //
+      // doc.text(20, 20, 'This is the first title.')
+      //
+      // doc.addFont('helvetica', 'normal')
+      // doc.text(20, 60, 'This is the second title.')
+      // doc.text(20, 100, 'This is the thrid title.')
+      //
+      //
+      // doc.save('demo.pdf')
+      window.print();
   }
 
   return (
@@ -202,7 +212,7 @@ function App() {
             <div className="panel-title">
                 <h2 className="panel-title">Preview panel</h2>
             </div>
-            <div className="cv-container">
+            <div className="cv-container myDivToPrint">
                 <div className="cv-header">
                     <h1>{generalInfo.firstname} {generalInfo.lastname}</h1>
                 </div>
