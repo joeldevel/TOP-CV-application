@@ -86,6 +86,7 @@ function App() {
       });
   const [education, setEducation] = useState([]);
   const [headingBg, setHeadingBg] = useState("dodgerblue");
+  const [headingColor, setHeadingColor] = useState("#000");
 
   // console.log([...generalInfo.education].map(x=>console.log('hola')));
   function handleChange(e) {
@@ -200,8 +201,10 @@ function App() {
                 <button className="control-button" onClick={resetFields}>Reset</button>
                 <button className="control-button">Save</button>
                 <ReactToPrint
+                  documentTitle="My CV"
                   trigger={() => <button className="control-button print-button">Print CV</button>}
                   content={() => componentRef}
+
                 />
                 {/*<button className="control-button print-button" onClick={printCV}>Print</button>*/}
             </div>
@@ -212,10 +215,19 @@ function App() {
                 <h2 className="panel-title">Preview panel</h2>
             </div>
             <div className="bg-color-picker">
-                <input type="color"/>
+                <label htmlFor="color">Change header background</label>
+                <input type="color" name="color" value={headingBg} onChange={(e)=>setHeadingBg(e.target.value)}/>
+                <label htmlFor="color">Change header color</label>
+                <input type="color" name="color" value={headingColor} onChange={(e)=>setHeadingColor(e.target.value)}/>
             </div>
-            <div className="cv-container" ref={(el) => (componentRef = el)}>
-                <div className="cv-header">
+            <div className="cv-container myDivToPrint"
+                ref={(el) => (componentRef = el)}>
+                {/*
+                <style type="text/css" media="print">
+                        "\@media print { .myDivToPrint{background: whitesmoke;}}\
+                </style>
+                "*/}
+                <div className="cv-header" style={{background: headingBg, color: headingColor}}>
                     <h1>{generalInfo.firstname} {generalInfo.lastname}</h1>
                 </div>
                 { generalInfo &&
