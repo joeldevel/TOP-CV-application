@@ -1,12 +1,14 @@
-import {useState} from 'react';
-
+import React, {useState, useRef} from 'react';
 import uniqid from 'uniqid';
+import ReactToPrint from "react-to-print";
 
 import PanelSection from './components/PanelSection';
 import EducationItem from './components/EducationItem';
 import EducationPanelSection from './components/EducationPanelSection';
 
 import './App.css';
+
+
 // example of data needed for creating inputs for edit panel
 // each section needs a title
 // data are input, each input needs a label and a value
@@ -75,6 +77,7 @@ let sections = [generalInfo, education, workExperience];
 const educationPrototype = {name: "", title: "", date: ""};
 
 function App() {
+    let componentRef = useRef();
   // console.log(sections);
   const [generalInfo, setGeneralInfo] = useState({
         firstname: "",
@@ -158,7 +161,7 @@ function App() {
       //
       //
       // doc.save('demo.pdf')
-      window.print();
+      // window.print();
   }
 
   return (
@@ -204,7 +207,11 @@ function App() {
             <div className="controls-container">
                 <button className="control-button" onClick={resetFields}>Reset</button>
                 <button className="control-button">Save</button>
-                <button className="control-button print-button" onClick={printCV}>Print</button>
+                <ReactToPrint
+                    trigger={() => <button className="control-button print-button">Print this out!</button>}
+                    content={() => componentRef}
+                    />
+                {/*<button className="control-button print-button" onClick={printCV}>Print</button>*/}
             </div>
         </div>
         {/* ======================= preview Panel ===================*/}
@@ -212,7 +219,7 @@ function App() {
             <div className="panel-title">
                 <h2 className="panel-title">Preview panel</h2>
             </div>
-            <div className="cv-container myDivToPrint">
+            <div className="cv-container myDivToPrint" ref={(el) => (componentRef = el)}>
                 <div className="cv-header">
                     <h1>{generalInfo.firstname} {generalInfo.lastname}</h1>
                 </div>
