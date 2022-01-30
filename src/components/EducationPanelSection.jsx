@@ -8,13 +8,15 @@ function EducationPanelSection (props) {
     const {edu} = props;
     return (
         <div>
-            <h3>new education item</h3>
-            <button type="button" onClick={()=>props.removeEducation(edu.id)}>
-                remove
-            </button>
-            <button onClick={()=>setPanelIsVisible(pre => !pre)}>
-                {isPanelVisible? "hide": "show"}
-            </button>
+            <header className="education-item-header">
+                <h3>new education item</h3>
+                <button type="button" onClick={()=>props.removeEducation(edu.id)}>
+                    remove
+                </button>
+                <button onClick={()=>setPanelIsVisible(pre => !pre)}>
+                    {isPanelVisible? "hide": "show"}
+                </button>
+            </header>
             <div className={`edit-section ${isPanelVisible? "visible": "hidden"}`}>
                 {
                 <div className="input-group">
@@ -24,7 +26,7 @@ function EducationPanelSection (props) {
                            name="education title"
                            data-id={edu.id}
                            onChange={(e)=> props.handleChange(e)}/>
-                     <label>name</label>
+                     <label>institution </label>
                      <input type="text"
                             value={edu.name.value}
                             name="education name"

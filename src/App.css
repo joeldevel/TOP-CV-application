@@ -125,6 +125,7 @@ button {
 .cv-field-label {
   font-weight: 600;
 }
+
 /*edit section
 ==============================================================================*/
 .edit-section header {
@@ -153,9 +154,23 @@ button {
   margin-left: 10px;
 }
 
+.education-item-header {
+    display: flex;
+    padding: 0 10px;
+    justify-content: space-between;
+}
 
+.education-item-header h3 {
+    flex: 1;
+}
 
-/* media query for printing */
+.education-item-header button {
+    min-width: 60px;
+}
+
+/*****************************************************************************
+                     media query for printing
+*******************************************************************************/
 @media print {
 
     .myDivToPrint {
