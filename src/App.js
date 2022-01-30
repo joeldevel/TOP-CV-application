@@ -1,6 +1,13 @@
 import {useState} from 'react';
+
+import uniqid from 'uniqid';
+
+import PanelSection from './components/PanelSection';
+import EducationItem from './components/EducationItem';
+import EducationPanelSection from './components/EducationPanelSection';
+
 import './App.css';
-// example of data needed
+// example of data needed for creating inputs for edit panel
 // each section needs a title
 // data are input, each input needs a label and a value
 // label is the field name and value is what the user inputs
@@ -24,6 +31,7 @@ let generalInfo = {
 };
 
 let education = {
+  id: "",
   title: "education",
   data: [
     { label: "name",
@@ -64,64 +72,70 @@ let workExperience = {
 
 let sections = [generalInfo, education, workExperience];
 
-function Input({label, value, name, section, handleChange}) {
-  const s = `${section} ${name}`;
-  return (
-    <div className="input-group">
-      <label>{label}</label>
-      <input type="text"
-             name={s}
-             value={value[name]}
-             onChange={(e) => handleChange(e)}/>
-    </div>);
-}
-
-function Section({title, data, value, section, handleChange}) {
-  // console.log(data)
-  return (
-    <div className="edit-section">
-      <header>
-          <h2> {title}</h2>
-            <div className="edit-section-btn-header-controls">
-                <button className="add-item" title="add item">+</button>
-                <button className="collapse" title="collapse">V</button>
-            </div>
-      </header>
-      {data.map((e, i) => <Input label={e.label} name={e.name} value={value} section={section} key={i} handleChange={handleChange}/>)}
-    </div>
-  );
-}
+const educationPrototype = {name: "", title: "", date: ""};
 
 function App() {
   // console.log(sections);
-  const [CVData, setCVData] = useState({
-      info: {
+  const [generalInfo, setGeneralInfo] = useState({
         firstname: "",
         lastname: "",
         email: "",
-      },
-      education: {
-        name: "",
-        title: "",
-        date: "",
-      }
-  });
-  // console.log(CVData);
+      });
+  const [education, setEducation] = useState([]);
+
+  // console.log([...generalInfo.education].map(x=>console.log('hola')));
   function handleChange(e) {
     // console.log(e.target.name);
-    const [section, name] = e.target.name.split(" ");
-    console.log(section, name)
-    // update data
-    setCVData(prevState => {
-      return ({
+    const [section, name] = e.currentTarget.name.split(" ");
+    if(section=="info"){
+        setGeneralInfo(prevState => {
+          return ({
             ...prevState,
-            [section]: {
-              ...prevState[section],
-              [name]:e.target.value
-            }
-        }
-      )
-    });
+            [name]:e.target.value
+          })
+        });
+    } else if(section=="education") {
+        // console.log(" handleChange education", e.target.dataset.id);
+        console.log("education: ", education);
+        // find object in array using data-id
+        const searchIndex = education.findIndex((edu) => edu.id==e.target.dataset.id);
+
+        console.log(searchIndex, name, e.target.value);
+        // update field using name
+        let newArray = [...education];
+        newArray[searchIndex][name] = e.target.value;
+        setEducation(newArray);
+    }
+  }
+
+  /* Adds group to edit panel*/
+  const addEducation = () => {
+
+    if( education.lenght === 0) {
+        setEducation([{
+            id: uniqid(),
+            name: "",
+            title:"" ,
+            date: "",
+        }]);
+        return;
+    }
+    setEducation(oldEducation => [...oldEducation, {
+        id: uniqid(),
+        name: "",
+        title:"" ,
+        date: "",
+    }]);
+  }
+
+  const addItem = () => {
+
+  }
+
+  const removeEducation = (id) => {
+      console.log(id);
+      const newEducationArray = education.filter(edu => edu.id!==id);
+      setEducation(newEducationArray);
   }
 
   return (
@@ -129,70 +143,75 @@ function App() {
         <div className="edit-panel">
             <div className="panel-title">
                 <h2>edit panel</h2>
-            </div>
-            <div className="sections-container scrollable-content">
-                <Section title={sections[0].title}
-                         data={sections[0].data}
-                         handleChange={handleChange}
-                         value={CVData.info}
-                         section="info"
-                         />
-                 <Section title={sections[1].title}
-                    data={sections[1].data}
-                    handleChange={handleChange}
-                    value={CVData.education}
-                    section="education"
-                    />
+                <header>
+                    <h2>general information</h2>
+                </header>
+             </div>
+             <div className="sections-container scrollable-content">
+             <PanelSection
+                     dataInputs={sections[0].data}
+                     handleChange={handleChange}
+                     data={generalInfo}
+                     section="info"
+                     showInputs={true}
+             />
 
+         <header className="edit-panel-section-header">
+             <h2>education</h2>
+                 <div className="edit-section-btn-header-controls">
+                     <button className="add-item"
+                         title="add item"
+                         data-section-group="education"
+                         onClick={(e) => addEducation(e)}>
+                         add
+                     </button>
+                 </div>
+         </header>
+         {education.length > 0 &&
+             education.map(edu => (
+                 <EducationPanelSection
+                     edu={edu}
+                     handleChange={handleChange}
+                     key={edu.id}
+                     removeEducation={removeEducation}/>
+             ))
+         }
             </div>
+            {/*edit controls*/}
             <div className="controls-container">
                 <button className="control-button">Reset</button>
                 <button className="control-button">Save</button>
                 <button className="control-button print-button">Print</button>
             </div>
         </div>
+        {/* ======================= preview Panel ===================*/}
         <div className="preview-panel">
             <div className="panel-title">
-                <h2 className="panel-title">preview panel</h2>
+                <h2 className="panel-title">Preview panel</h2>
             </div>
             <div className="cv-container">
                 <div className="cv-header">
-                    <h1>cv preview here</h1>
+                    <h1>{generalInfo.firstname} {generalInfo.lastname}</h1>
                 </div>
-                { CVData &&
+                { generalInfo &&
                 <div className="cv-body">
                     <section className="cv-section">
                         <h2 className="cv-section-title">General information</h2>
                         <p className="cv-complete-name">
                             <span className="cv-field-label">name </span>
-                            {CVData.info.firstname} {CVData.info.lastname}
+                            {generalInfo.firstname} {generalInfo.lastname}
                         </p>
                         <p className="cv-email">
                             <span className="cv-field-label">email </span>
-                            {CVData.info.email}
+                            {generalInfo.email}
                         </p>
                     </section>
                     <section className="cv-section">
                         <h2 className="cv-section-title">Education</h2>
                         <ul className="education-list">
-                            <li>
-                                <span className="cv-field-label">name </span>{CVData.education.name}
-                                   <ul>
-                                        <li><span className="cv-field-label">title </span>
-                                            {CVData.education.title}
-                                        </li>
-                                        <li><span className="cv-field-label">date </span>
-                                            {CVData.education.date}
-                                        </li>
-                                   </ul>
-                            </li>
-                            <li>
-                                <span className="cv-field-label">name </span>Pio XII Politeknejus
-                                   <ul>
-                                        <li><span className="cv-field-label">title </span>Boleadoras Engineer</li>
-                                        <li><span className="cv-field-label">date </span>2015</li>
-                                   </ul>
-                            </li>
+                          {education.length > 0 && education.map((item, i)=>(
+                            <EducationItem key={i}/>
+                          ))}
                         </ul>
                     </section>
                     <section className="cv-section">
@@ -224,5 +243,33 @@ function App() {
     </div>
   );
 }
+
+// function EducationItem({data}) {
+//   console.log(data)
+//     return (
+//           <li>
+//               <span className="cv-field-label">name </span>{data.name}
+//                  <ul>
+//                       <li><span className="cv-field-label">title </span>
+//                           {data.title}
+//                       </li>
+//                       <li><span className="cv-field-label">date </span>
+//                           {data.date}
+//                       </li>
+//                  </ul>
+//           </li>
+//     )
+// }
+// {/*<li>
+//     <span className="cv-field-label">name </span>{generalInfo.education.name}
+//        <ul>
+//             <li><span className="cv-field-label">title </span>
+//                 {generalInfo.education.title}
+//             </li>
+//             <li><span className="cv-field-label">date </span>
+//                 {generalInfo.education.date}
+//             </li>
+//        </ul>
+// </li>*/}
 
 export default App;

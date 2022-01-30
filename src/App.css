@@ -27,6 +27,13 @@ button {
 
 /*edit panel
 ==============================================================================*/
+.edit-panel-section-header {
+    display: flex;
+    justify-content: space-between;
+    background: red;
+    margin: 10px;
+    padding-right:10px;
+}
 .edit-panel {
   background: #888;
   display: flex;
