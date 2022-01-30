@@ -1,6 +1,7 @@
-import {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 import uniqid from 'uniqid';
+import ReactToPrint from "react-to-print";
 
 import PanelSection from './components/PanelSection';
 import EducationItem from './components/EducationItem';
@@ -75,6 +76,8 @@ let sections = [generalInfo, education, workExperience];
 const educationPrototype = {name: "", title: "", date: ""};
 
 function App() {
+
+  let componentRef = useRef();
   // console.log(sections);
   const [generalInfo, setGeneralInfo] = useState({
         firstname: "",
@@ -83,6 +86,7 @@ function App() {
       });
   const [education, setEducation] = useState([]);
   const [headingBg, setHeadingBg] = useState("dodgerblue");
+
   // console.log([...generalInfo.education].map(x=>console.log('hola')));
   function handleChange(e) {
     // console.log(e.target.name);
@@ -191,10 +195,15 @@ function App() {
          }
             </div>
             {/*edit controls*/}
+
             <div className="controls-container">
                 <button className="control-button" onClick={resetFields}>Reset</button>
                 <button className="control-button">Save</button>
-                <button className="control-button print-button" onClick={printCV}>Print</button>
+                <ReactToPrint
+                  trigger={() => <button className="control-button print-button">Print CV</button>}
+                  content={() => componentRef}
+                />
+                {/*<button className="control-button print-button" onClick={printCV}>Print</button>*/}
             </div>
         </div>
         {/* ======================= preview Panel ===================*/}
@@ -205,7 +214,7 @@ function App() {
             <div className="bg-color-picker">
                 <input type="color"/>
             </div>
-            <div className="cv-container">
+            <div className="cv-container" ref={(el) => (componentRef = el)}>
                 <div className="cv-header">
                     <h1>{generalInfo.firstname} {generalInfo.lastname}</h1>
                 </div>
