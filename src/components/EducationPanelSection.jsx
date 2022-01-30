@@ -1,16 +1,21 @@
+import {useState, useEffect} from 'react';
+
 import Input from './Input';
 
 function EducationPanelSection (props) {
-    console.log(props.handleChange);
+    const [isPanelVisible, setPanelIsVisible] = useState(true);
+    // console.log(props.handleChange);
     const {edu} = props;
-
     return (
         <div>
-            <h1>new education</h1>
+            <h3>new education item</h3>
             <button type="button" onClick={()=>props.removeEducation(edu.id)}>
                 remove
             </button>
-            <div className="edit-section">
+            <button onClick={()=>setPanelIsVisible(pre => !pre)}>
+                {isPanelVisible? "hide": "show"}
+            </button>
+            <div className={`edit-section ${isPanelVisible? "visible": "hidden"}`}>
                 {
                 <div className="input-group">
                     <label>title</label>
