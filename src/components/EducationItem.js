@@ -6,7 +6,7 @@
 
 function EducationItem({id, name, title, date}) {
     return (
-      <div className="education-item" data-id={id}>
+      <div className="education-item" >
           <ul>
               <li>name: {name}</li>
               <li>title: {title}</li>

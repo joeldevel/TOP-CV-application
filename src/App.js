@@ -210,7 +210,7 @@ function App() {
                         <h2 className="cv-section-title">Education</h2>
                         <ul className="education-list">
                           {education.length > 0 && education.map((item, i)=>(
-                            <EducationItem key={i}/>
+                            <EducationItem key={i} name={item.name} title={item.title} date={item.date}/>
                           ))}
                         </ul>
                     </section>
