@@ -11,6 +11,7 @@ function Input({label, data, name, section, handleChange}) {
       <input type="text"
              name={s}
              data={data[name]}
+             value={data[name]}
              onChange={(e) => handleChange(e)}/>
     </div>);
 }

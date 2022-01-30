@@ -138,6 +138,19 @@ function App() {
       setEducation(newEducationArray);
   }
 
+  const resetFields = () => {
+      setEducation([]);
+      setGeneralInfo({
+            firstname: "",
+            lastname: "",
+            email: "",
+        });
+  }
+
+  const printCV = () => {
+
+  }
+
   return (
     <div className="app">
         <div className="edit-panel">
@@ -179,9 +192,9 @@ function App() {
             </div>
             {/*edit controls*/}
             <div className="controls-container">
-                <button className="control-button">Reset</button>
+                <button className="control-button" onClick={resetFields}>Reset</button>
                 <button className="control-button">Save</button>
-                <button className="control-button print-button">Print</button>
+                <button className="control-button print-button" onClick={printCV}>Print</button>
             </div>
         </div>
         {/* ======================= preview Panel ===================*/}
