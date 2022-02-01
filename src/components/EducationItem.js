@@ -4,15 +4,15 @@
   then is diplayed in CV preview panel
 */
 
-function EducationItem({id, name, title, date}) {
+function EducationItem({ id, name, title, date }) {
     return (
-      <div className="education-item" >
-          <ul>
-              <li>name: {name}</li>
-              <li>title: {title}</li>
-              <li>date: {date}</li>
-          </ul>
-      </div>
-    )
+        <div className="education-item">
+            <ul>
+                <li>name: {name}</li>
+                <li>title: {title}</li>
+                <li>date: {date}</li>
+            </ul>
+        </div>
+    );
 }
 export default EducationItem;
