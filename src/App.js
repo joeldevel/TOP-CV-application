@@ -159,12 +159,12 @@ function App() {
   return (
     <div className="app">
         <div className="edit-panel">
-            <div className="panel-title">
+            <div className="panel-title-container">
                 <h2>edit panel</h2>
-                <header>
-                    <h2>general information</h2>
-                </header>
              </div>
+             <header class="edit-section-header">
+                 <h2>general information</h2>
+             </header>
              <div className="sections-container scrollable-content">
              <PanelSection
                      dataInputs={sections[0].data}
@@ -211,7 +211,7 @@ function App() {
         </div>
         {/* ======================= preview Panel ===================*/}
         <div className="preview-panel">
-            <div className="panel-title">
+            <div className="panel-title-container">
                 <h2 className="panel-title">Preview panel</h2>
             </div>
             <div className="bg-color-picker">

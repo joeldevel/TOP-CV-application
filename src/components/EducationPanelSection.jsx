@@ -10,10 +10,10 @@ function EducationPanelSection (props) {
         <div>
             <header className="education-item-header">
                 <h3>new education item</h3>
-                <button type="button" onClick={()=>props.removeEducation(edu.id)}>
+                <button className="btn"type="button" onClick={()=>props.removeEducation(edu.id)}>
                     remove
                 </button>
-                <button onClick={()=>setPanelIsVisible(pre => !pre)}>
+                <button className="btn" onClick={()=>setPanelIsVisible(pre => !pre)}>
                     {isPanelVisible? "hide": "show"}
                 </button>
             </header>

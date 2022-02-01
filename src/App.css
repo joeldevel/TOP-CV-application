@@ -1,8 +1,9 @@
 /* general
 ==============================================================================*/
 .app {
-  display: flex;
+  display: grid;
   min-height: 100vh;
+  grid-template-columns: 20vw auto;
 }
 
 button {
@@ -27,23 +28,49 @@ button {
 
 /*edit panel
 ==============================================================================*/
+
+.edit-panel {
+    background: pink;
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    border-right: 1px solid #333;
+    height: 100vh;
+    position: relative;
+    top:0;
+    left: 0;
+}
+
 .edit-panel-section-header {
     display: flex;
     justify-content: space-between;
     background: red;
-    margin: 10px;
-    padding-right:10px;
+    /* margin: 10px; */
+    padding:0 10px;
+    position: sticky;
+    top: 0;
 }
-.edit-panel {
-  background: #888;
-  display: flex;
-  flex-direction: column;
-  width: 20vw;
-  /* overflow: scroll; */
+
+.panel-title-container {
+    background: orange;
+    width: 100%;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+.edit-section-header {
+    background: #888;
+    padding:0 10px;
+    /* height: 100%; */
 }
 
 .sections-container {
-  /* overflow: scroll; */
+  background: green;
+  padding-bottom: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
 }
 
 .visible {
@@ -53,17 +80,22 @@ button {
 .hidden {
     display: none;
 }
+
 .edit-section {
   margin: 10px;
   border: 1px dashed #fff;
   padding-bottom: 10px;
+  /* flex: 1; */
+  width: calc(100% - 20px);
 }
 
 .controls-container {
-  display: flex;
-  flex-wrap: wrap;
-  /* background: red; */
-  margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    background: purple;
+    position: sticky;
+    bottom: 0;
+    left: 0;
 }
 
 .control-button {
@@ -80,6 +112,14 @@ button {
   border: 2px solid #000;
 }
 
+/* buttons
+==============================================================================*/
+.btn {
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
 /* inputs
 ==============================================================================*/
 .input-group {
@@ -91,11 +131,14 @@ button {
 /* preview panel
 ==============================================================================*/
 .preview-panel {
-  background: #777;
+  background: #eee;
   flex:1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  overflow-y: scroll;
+  /* padding-bottom: 1em; */
 }
 
 /*cv container
@@ -103,22 +146,27 @@ button {
 .cv-container {
   min-height: 700px;
   width: 500px;
-  background: #fff;
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 2rem;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
-
 
 .cv-header {
   background: dodgerblue;
   text-align: center;
 }
 
+.cv-body {
+    flex: 1;
+    background: #fff;
+}
+
 .cv-section {
   border: 1px solid black;
   padding-left: 20px;
 }
+
 .cv-section p {
   line-height: 0.8;
 }
@@ -137,8 +185,10 @@ button {
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
+
 /*edit section
 ==============================================================================*/
+
 .edit-section header {
   display: flex;
   justify-content: space-between;
@@ -169,6 +219,7 @@ button {
     display: flex;
     padding: 0 10px;
     justify-content: space-between;
+    align-items: center;
 }
 
 .education-item-header h3 {
@@ -198,6 +249,9 @@ button {
     .cv-section {
       border: 0px solid black;
       /* padding-left: 20px; */
+    }
+    .cv-container {
+      box-shadow: none;
     }
 
 }
