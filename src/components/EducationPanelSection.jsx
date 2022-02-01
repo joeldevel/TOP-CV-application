@@ -7,13 +7,13 @@ function EducationPanelSection (props) {
     // console.log(props.handleChange);
     const {edu} = props;
     return (
-        <div>
+        <div className="new-education-item">
             <header className="education-item-header">
                 <h3>new education item</h3>
-                <button className="btn"type="button" onClick={()=>props.removeEducation(edu.id)}>
+                <button className="btn btn-remove" type="button" onClick={()=>props.removeEducation(edu.id)}>
                     remove
                 </button>
-                <button className="btn" onClick={()=>setPanelIsVisible(pre => !pre)}>
+                <button className="btn btn-toggle-show" onClick={()=>setPanelIsVisible(pre => !pre)}>
                     {isPanelVisible? "hide": "show"}
                 </button>
             </header>

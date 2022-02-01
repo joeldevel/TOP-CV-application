@@ -223,7 +223,7 @@ const addWorkExperience = () => {
          <header className="edit-panel-section-header">
              <h2>education</h2>
                  <div className="edit-section-btn-header-controls">
-                     <button className="add-item"
+                     <button className="btn add-item"
                          title="add item"
                          data-section-group="education"
                          onClick={(e) => addEducation(e)}>
@@ -243,7 +243,7 @@ const addWorkExperience = () => {
              <header className="edit-panel-section-header">
                  <h2>Work experience</h2>
                  <div className="edit-section-btn-header-controls">
-                     <button className="add-item"
+                     <button className="add-item btn"
                          title="add item"
                          data-section-group="education"
                          onClick={(e) => addWorkExperience(e)}>
@@ -268,7 +268,7 @@ const addWorkExperience = () => {
 
             <div className="controls-container">
                 <button className="control-button" onClick={resetFields}>Reset</button>
-                <button className="control-button">Save</button>
+                <button className="control-button" disabled>Save</button>
                 <ReactToPrint
                   documentTitle="My CV"
                   trigger={() => <button className="control-button print-button">Print CV</button>}

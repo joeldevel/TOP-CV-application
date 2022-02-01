@@ -11,7 +11,7 @@ button {
 }
 
 .panel-title {
-  background: #ddd;
+  /* background: #ddd; */
   width: 100%;
   text-align: center;
 }
@@ -30,29 +30,34 @@ button {
 ==============================================================================*/
 
 .edit-panel {
-    background: pink;
+    background: #fff;
     display: flex;
     flex-direction: column;
-    width: 20vw;
-    border-right: 1px solid #333;
+    min-width: 350px;
+    max-width: 20vw;
+    border-right: 1px solid #aaa;
     height: 100vh;
     position: relative;
     top:0;
     left: 0;
+    z-index: 100;
 }
 
 .edit-panel-section-header {
     display: flex;
     justify-content: space-between;
-    background: red;
+    background: #eaeaea;
     /* margin: 10px; */
     padding:0 10px;
     position: sticky;
     top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1px;
 }
 
 .panel-title-container {
-    background: orange;
+    background: #fafafa;
     width: 100%;
     text-align: center;
     position: sticky;
@@ -60,42 +65,45 @@ button {
 }
 
 .edit-section-header {
-    background: #888;
+    background: #eaeaea;
     padding:0 10px;
     /* height: 100%; */
 }
 
 .sections-container {
-  background: green;
+  /* background: green; */
   padding-bottom: 200px;
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
 }
 
-.visible {
-    display: inline-block;
-}
-
-.hidden {
-    display: none;
-}
-
 .edit-section {
   margin: 10px;
-  border: 1px dashed #fff;
+  /* border: 1px dashed #fff; */
   padding-bottom: 10px;
   /* flex: 1; */
   width: calc(100% - 20px);
+  transition: height 2s ease;
+}
+
+.visible {
+    height: auto;
+}
+
+.hidden *{
+    height: 0;
+    overflow: hidden;
 }
 
 .controls-container {
     display: flex;
     flex-wrap: wrap;
-    background: purple;
+    /* background: purple; */
     position: sticky;
     bottom: 0;
     left: 0;
+    border-top: 1px solid #ccc;
 }
 
 .control-button {
@@ -110,14 +118,35 @@ button {
   flex: 2;
   background: greenyellow;
   border: 2px solid #000;
+  opacity: 0.8;
 }
 
+.print-button:hover {
+    opacity: 1;
+}
 /* buttons
 ==============================================================================*/
 .btn {
     background: #fff;
-    border: 1px solid #000;
-    border-radius: 10px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin: 0 1px;
+    opacity: 0.9;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.btn:hover {
+    opacity: 1;
+}
+
+.btn-remove {
+    background: crimson;
+    color: #fff;
+}
+
+.btn-toggle-show {
+    background: lightblue;
 }
 
 /* inputs
@@ -141,6 +170,10 @@ button {
   /* padding-bottom: 1em; */
 }
 
+.preview-panel .panel-title-container {
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+    background: #eee;
+}
 /*cv container
 ==============================================================================*/
 .cv-container {
@@ -206,6 +239,7 @@ button {
   width: 40px;
   height: 40px;
   /* margin-left: 10px; */
+  background: aquamarine;
 }
 
 .collapse {
@@ -215,21 +249,32 @@ button {
   margin-left: 10px;
 }
 
-.education-item-header {
+.education-item-header,
+.work-item-header {
     display: flex;
     padding: 0 10px;
     justify-content: space-between;
     align-items: center;
 }
 
-.education-item-header h3 {
+.education-item-header h3,
+.work-item-header h3 {
     flex: 1;
 }
 
-.education-item-header button {
+.education-item-header button,
+.work-item-header button {
     min-width: 60px;
 }
 
+.new-education-item {
+    /* border: 1px solid #999; */
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    background: #eee;
+}
 /*****************************************************************************
                      media query for printing
 *******************************************************************************/

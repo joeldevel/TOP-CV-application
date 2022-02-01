@@ -7,13 +7,13 @@ function WorkPanelSection (props) {
     // console.log(props.handleChange);
     const {experience} = props;
     return (
-        <div>
+        <div className="new-education-item">
             <header className="work-item-header">
                 <h3>new work item</h3>
-                <button className="btn"type="button" onClick={()=>props.removeWorkExperience(experience.id)}>
+                <button className="btn btn-remove" type="button" onClick={()=>props.removeWorkExperience(experience.id)}>
                     remove
                 </button>
-                <button className="btn" onClick={()=>setPanelIsVisible(pre => !pre)}>
+                <button className="btn btn-toggle-show" onClick={()=>setPanelIsVisible(pre => !pre)}>
                     {isPanelVisible? "hide": "show"}
                 </button>
             </header>
