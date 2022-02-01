@@ -4,7 +4,6 @@ import Input from './Input';
 
 function WorkPanelSection (props) {
     const [isPanelVisible, setPanelIsVisible] = useState(true);
-    // console.log(props.handleChange);
     const {experience} = props;
     return (
         <div className="new-education-item">
@@ -20,34 +19,34 @@ function WorkPanelSection (props) {
             <div className={`edit-section ${isPanelVisible? "visible": "hidden"}`}>
                 {
                 <div className="input-group">
-                    <label>company </label>
+                    <label>Company </label>
                     <input type="text"
                            value={experience.company.value}
                            name="work-experience company"
                            data-id={experience.id}
                            onChange={(e)=> props.handleChange(e)}/>
-                     <label>role/position </label>
+                       <label>Role/position </label>
                      <input type="text"
                             value={experience.position.value}
                             name="work-experience position"
                             data-id={experience.id}
                             onChange={(e)=> props.handleChange(e)}
                      />
-                    <label>main tasks</label>
+                 <label>Main tasks</label>
                     <textarea value={experience.mainTasks.value}
                             name="work-experience position"
                             data-id={experience.id}
                             onChange={(e)=> props.handleChange(e)}
                      />
 
-                    <label>from </label>
+                 <label>From </label>
                     <input type="date"
                            value={experience.dateFrom.value}
                            name="work-experience dateFrom"
                            data-id={experience.id}
                            onChange={(e)=> props.handleChange(e)}
                     />
-                    <label>to </label>
+                <label>To </label>
                     <input type="date"
                           value={experience.dateTo.value}
                           name="work-experience dateTo"

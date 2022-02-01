@@ -16,15 +16,6 @@ button {
   text-align: center;
 }
 
- /* .scrollable-content {
-  position: absolute;
-  top: ;
-  bottom: 0;
-  left: 0;
-  flex-grow: 1;
-  overflow: auto;
-  min-height: 0;
-} */
 
 /*edit panel
 ==============================================================================*/
@@ -293,7 +284,6 @@ button {
 
     .cv-section {
       border: 0px solid black;
-      /* padding-left: 20px; */
     }
     .cv-container {
       box-shadow: none;

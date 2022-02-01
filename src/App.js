@@ -9,11 +9,7 @@ import EducationPanelSection from './components/EducationPanelSection';
 import WorkPanelSection from './components/WorkPanelSection';
 
 import './App.css';
-// example of data needed for creating inputs for edit panel
-// each section needs a title
-// data are input, each input needs a label and a value
-// label is the field name and value is what the user inputs
-// <input name="label here" value={}>
+
 let generalInfo = {
   title: "general information",
   data: [
@@ -79,7 +75,6 @@ const educationPrototype = {name: "", title: "", date: ""};
 function App() {
   // for printing cv using react-to-pdf
   let componentRef = useRef();
-  // console.log(sections);
   const [generalInfo, setGeneralInfo] = useState({
         firstname: "",
         lastname: "",
@@ -91,7 +86,6 @@ function App() {
   const [headingBg, setHeadingBg] = useState("dodgerblue");
   const [headingColor, setHeadingColor] = useState("#000");
 
-  // console.log([...generalInfo.education].map(x=>console.log('hola')));
   function handleChange(e) {
     // console.log(e.target.name);
     const [section, name] = e.currentTarget.name.split(" ");
@@ -103,8 +97,6 @@ function App() {
           })
         });
     } else if(section=="education") {
-        // console.log(" handleChange education", e.target.dataset.id);
-        console.log("education: ", education);
         // find object in array using data-id
         const searchIndex = education.findIndex((edu) => edu.id==e.target.dataset.id);
 
@@ -115,11 +107,8 @@ function App() {
         setEducation(newArray);
 
     }else if(section=="work-experience") {
-        // console.log({workExperience});
         // find object in array using data-id
         const searchIndex = workExperience.findIndex((exp) => exp.id==e.target.dataset.id);
-        //
-        // console.log(searchIndex, name, e.target.value);
         // // update field using name
         let newArray = [...workExperience];
         newArray[searchIndex][name] = e.target.value;
@@ -147,10 +136,6 @@ function App() {
     }]);
   }
 
-  const addItem = () => {
-
-  }
-
   const removeEducation = (id) => {
       console.log(id);
       const newEducationArray = education.filter(edu => edu.id!==id);
@@ -167,14 +152,10 @@ function App() {
         });
   }
 
-  const printCV = () => {
-
-  }
 
 // work experienc
 /* Adds group to edit panel*/
 const addWorkExperience = () => {
-// company name, position title, main tasks of your jobs, date from and until when you worked for that company
   if( workExperience.lenght === 0) {
       setWorkExperience([{
           id: uniqid(),
@@ -206,10 +187,10 @@ const addWorkExperience = () => {
     <div className="app">
         <div className="edit-panel">
             <div className="panel-title-container">
-                <h2>edit panel</h2>
+                <h2>Edit panel</h2>
              </div>
              <header class="edit-section-header">
-                 <h2>general information</h2>
+                 <h2>General information</h2>
              </header>
              <div className="sections-container scrollable-content">
              <PanelSection
@@ -221,13 +202,13 @@ const addWorkExperience = () => {
              />
 
          <header className="edit-panel-section-header">
-             <h2>education</h2>
+             <h2>Education</h2>
                  <div className="edit-section-btn-header-controls">
                      <button className="btn add-item"
                          title="add item"
                          data-section-group="education"
                          onClick={(e) => addEducation(e)}>
-                         add
+                         Add
                      </button>
                  </div>
          </header>
@@ -247,7 +228,7 @@ const addWorkExperience = () => {
                          title="add item"
                          data-section-group="education"
                          onClick={(e) => addWorkExperience(e)}>
-                         add
+                         Add
                      </button>
                  </div>
              </header>
@@ -275,7 +256,6 @@ const addWorkExperience = () => {
                   content={() => componentRef}
 
                 />
-                {/*<button className="control-button print-button" onClick={printCV}>Print</button>*/}
             </div>
         </div>
         {/* ======================= preview Panel ===================*/}
@@ -291,11 +271,6 @@ const addWorkExperience = () => {
             </div>
             <div className="cv-container myDivToPrint"
                 ref={(el) => (componentRef = el)}>
-                {/*
-                <style type="text/css" media="print">
-                        "\@media print { .myDivToPrint{background: whitesmoke;}}\
-                </style>
-                "*/}
                 <div className="cv-header" style={{background: headingBg, color: headingColor}}>
                     <h1>
                         {generalInfo.firstname.length!==0 ? `${generalInfo.firstname} ${generalInfo.lastname}`: "your name"}
@@ -327,12 +302,12 @@ const addWorkExperience = () => {
                         <ul className="work-experience-list">
                           {workExperience.length > 0 && workExperience.map((item, i)=>(
                               <li>
-                                  <span className="cv-field-label">company </span> {item.company}
+                                  <span className="cv-field-label">Company </span> {item.company}
                                       <ul>
-                                          <li><span className="cv-field-label">position </span>{item.position}</li>
-                                          <li><span className="cv-field-label">main tasks </span>{item.mainTasks}</li>
-                                          <li><span className="cv-field-label">from </span>{item.dateFrom}</li>
-                                          <li><span className="cv-field-label">to </span>{item.dateTo}</li>
+                                          <li><span className="cv-field-label">Position </span>{item.position}</li>
+                                          <li><span className="cv-field-label">Main tasks </span>{item.mainTasks}</li>
+                                          <li><span className="cv-field-label">From </span>{item.dateFrom}</li>
+                                          <li><span className="cv-field-label">To </span>{item.dateTo}</li>
                                       </ul>
                                </li>
                           ))}

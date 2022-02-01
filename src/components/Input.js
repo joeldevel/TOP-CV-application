@@ -3,13 +3,12 @@
   data: this plus handleChange makes possible take control of input
 */
 function Input({label, data, name, section, handleChange}) {
-  const s = `${section} ${name}`;
-  // console.log('input component: ', data);
+  const sectionName = `${section} ${name}`;
   return (
     <div className="input-group">
       <label>{label}</label>
       <input type="text"
-             name={s}
+             name={sectionName}
              data={data[name]}
              value={data[name]}
              onChange={(e) => handleChange(e)}/>
