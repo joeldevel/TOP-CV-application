@@ -6,6 +6,7 @@ import ReactToPrint from "react-to-print";
 import PanelSection from './components/PanelSection';
 import EducationItem from './components/EducationItem';
 import EducationPanelSection from './components/EducationPanelSection';
+import WorkPanelSection from './components/WorkPanelSection';
 
 import './App.css';
 // example of data needed for creating inputs for edit panel
@@ -76,7 +77,7 @@ let sections = [generalInfo, education, workExperience];
 const educationPrototype = {name: "", title: "", date: ""};
 
 function App() {
-
+  // for printing cv using react-to-pdf
   let componentRef = useRef();
   // console.log(sections);
   const [generalInfo, setGeneralInfo] = useState({
@@ -85,6 +86,8 @@ function App() {
         email: "",
       });
   const [education, setEducation] = useState([]);
+  const [workExperience, setWorkExperience] = useState([]);
+
   const [headingBg, setHeadingBg] = useState("dodgerblue");
   const [headingColor, setHeadingColor] = useState("#000");
 
@@ -110,6 +113,17 @@ function App() {
         let newArray = [...education];
         newArray[searchIndex][name] = e.target.value;
         setEducation(newArray);
+
+    }else if(section=="work-experience") {
+        // console.log({workExperience});
+        // find object in array using data-id
+        const searchIndex = workExperience.findIndex((exp) => exp.id==e.target.dataset.id);
+        //
+        // console.log(searchIndex, name, e.target.value);
+        // // update field using name
+        let newArray = [...workExperience];
+        newArray[searchIndex][name] = e.target.value;
+        setWorkExperience(newArray);
     }
   }
 
@@ -145,6 +159,7 @@ function App() {
 
   const resetFields = () => {
       setEducation([]);
+      setWorkExperience([]);
       setGeneralInfo({
             firstname: "",
             lastname: "",
@@ -155,6 +170,37 @@ function App() {
   const printCV = () => {
 
   }
+
+// work experienc
+/* Adds group to edit panel*/
+const addWorkExperience = () => {
+// company name, position title, main tasks of your jobs, date from and until when you worked for that company
+  if( workExperience.lenght === 0) {
+      setWorkExperience([{
+          id: uniqid(),
+          company: "",
+          position:"" ,
+          mainTasks: "",
+          dateFrom: "",
+          dateTo: "",
+      }]);
+      return;
+  }
+  setWorkExperience(oldExperience => [...oldExperience, {
+      id: uniqid(),
+      company: "",
+      position:"" ,
+      mainTasks: "",
+      dateFrom: "",
+      dateTo: "",
+      }]);
+    }
+
+    const removeWorkExperience = (id) => {
+        console.log(id);
+        const newWorkExperienceArray = workExperience.filter(exp => exp.id!==id);
+        setWorkExperience(newWorkExperienceArray);
+    }
 
   return (
     <div className="app">
@@ -194,8 +240,31 @@ function App() {
                      removeEducation={removeEducation}/>
              ))
          }
+             <header className="edit-panel-section-header">
+                 <h2>Work experience</h2>
+                 <div className="edit-section-btn-header-controls">
+                     <button className="add-item"
+                         title="add item"
+                         data-section-group="education"
+                         onClick={(e) => addWorkExperience(e)}>
+                         add
+                     </button>
+                 </div>
+             </header>
+             {workExperience.length > 0 &&
+                 workExperience.map(experience => (
+                     <WorkPanelSection
+                         experience={experience}
+                         handleChange={handleChange}
+                         key={experience.id}
+                         removeWorkExperience={removeWorkExperience}/>
+                 ))
+             }
             </div>
-            {/*edit controls*/}
+
+
+
+            {/* ************ control buttons ***************** */}
 
             <div className="controls-container">
                 <button className="control-button" onClick={resetFields}>Reset</button>
@@ -228,7 +297,9 @@ function App() {
                 </style>
                 "*/}
                 <div className="cv-header" style={{background: headingBg, color: headingColor}}>
-                    <h1>{generalInfo.firstname} {generalInfo.lastname}</h1>
+                    <h1>
+                        {generalInfo.firstname.length!==0 ? `${generalInfo.firstname} ${generalInfo.lastname}`: "your name"}
+                    </h1>
                 </div>
                 { generalInfo &&
                 <div className="cv-body">
@@ -254,23 +325,17 @@ function App() {
                     <section className="cv-section">
                         <h2 className="cv-section-title">Work experience</h2>
                         <ul className="work-experience-list">
-                            <li>
-                                <span className="cv-field-label">company </span> google
-                                   <ul>
-                                        <li><span className="cv-field-label">position </span>CEO</li>
-                                        <li><span className="cv-field-label">from </span>1990</li>
-                                        <li><span className="cv-field-label">to </span>present</li>
-                                   </ul>
-                            </li>
-                            <li>
-                                <span className="cv-field-label">company </span> Amazon
-                                   <ul>
-                                        <li><span className="cv-field-label">position </span>Call center</li>
-                                        <li><span className="cv-field-label">from </span>1985</li>
-                                        <li><span className="cv-field-label">to </span>1990</li>
-                                   </ul>
-                            </li>
-
+                          {workExperience.length > 0 && workExperience.map((item, i)=>(
+                              <li>
+                                  <span className="cv-field-label">company </span> {item.company}
+                                      <ul>
+                                          <li><span className="cv-field-label">position </span>{item.position}</li>
+                                          <li><span className="cv-field-label">main tasks </span>{item.mainTasks}</li>
+                                          <li><span className="cv-field-label">from </span>{item.dateFrom}</li>
+                                          <li><span className="cv-field-label">to </span>{item.dateTo}</li>
+                                      </ul>
+                               </li>
+                          ))}
                         </ul>
                     </section>
                 </div>
@@ -281,32 +346,5 @@ function App() {
   );
 }
 
-// function EducationItem({data}) {
-//   console.log(data)
-//     return (
-//           <li>
-//               <span className="cv-field-label">name </span>{data.name}
-//                  <ul>
-//                       <li><span className="cv-field-label">title </span>
-//                           {data.title}
-//                       </li>
-//                       <li><span className="cv-field-label">date </span>
-//                           {data.date}
-//                       </li>
-//                  </ul>
-//           </li>
-//     )
-// }
-// {/*<li>
-//     <span className="cv-field-label">name </span>{generalInfo.education.name}
-//        <ul>
-//             <li><span className="cv-field-label">title </span>
-//                 {generalInfo.education.title}
-//             </li>
-//             <li><span className="cv-field-label">date </span>
-//                 {generalInfo.education.date}
-//             </li>
-//        </ul>
-// </li>*/}
 
 export default App;
